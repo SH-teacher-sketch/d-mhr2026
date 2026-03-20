@@ -17,6 +17,11 @@
         /* Modal Styles */
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); z-index: 50; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
         .modal-overlay.active { display: flex; }
+
+        /* Quiz Styles */
+        .option-btn { transition: all 0.2s; border: 1px solid #e2e8f0; width: 100%; text-align: left; padding: 1rem; border-radius: 0.75rem; font-weight: 500; background-color: white; }
+        .option-btn:hover { background-color: #f1f5f9; border-color: #6366f1; }
+        .option-btn.selected { background-color: #e0e7ff; border-color: #6366f1; color: #4338ca; font-weight: 600; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen p-4 md:p-8">
@@ -34,7 +39,7 @@
     </div>
 
     <!-- Top Navigation / Home Button -->
-    <div class="max-w-4xl mx-auto mb-4">
+    <div class="max-w-4xl mx-auto mb-4 flex justify-between items-center">
         <a href="../index.html" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 hover:bg-white rounded-lg transition-all border border-transparent hover:border-slate-200">
             <i data-lucide="home" class="w-4 h-4"></i>
             홈으로 돌아가기
@@ -67,9 +72,9 @@
             <i data-lucide="alert-circle" class="w-5 h-5"></i>
             <span class="font-medium">Fix-up 전략</span>
         </button>
-        <button data-tab="practice" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full transition-all bg-white text-indigo-600 hover:bg-indigo-50 border border-indigo-100">
-            <i data-lucide="check-circle" class="w-5 h-5"></i>
-            <span class="font-medium">실습하기</span>
+        <button data-tab="quiz" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full transition-all bg-white text-indigo-600 hover:bg-indigo-50 border border-indigo-100">
+            <i data-lucide="help-circle" class="w-5 h-5"></i>
+            <span class="font-medium">퀴즈 풀기</span>
         </button>
     </nav>
 
@@ -229,39 +234,24 @@
             </div>
         </div>
 
-        <!-- Tab: Practice -->
-        <div id="practice" class="tab-content animate-fade-in">
-            <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-                <h2 class="text-2xl font-bold flex items-center gap-2">
-                    <i data-lucide="check-circle" class="text-indigo-500"></i> 인터랙티브 실습
-                </h2>
-                <div class="flex gap-2">
-                    <button id="prev-btn" class="p-2 rounded-full hover:bg-slate-100 border text-slate-400">
-                        <i data-lucide="chevron-left"></i>
-                    </button>
-                    <button id="next-btn" class="p-2 rounded-full hover:bg-slate-100 border text-indigo-600">
-                        <i data-lucide="chevron-right"></i>
-                    </button>
-                </div>
+        <!-- Tab: Quiz -->
+        <div id="quiz" class="tab-content animate-fade-in">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                <i data-lucide="help-circle" class="text-indigo-500"></i> 퀴즈 풀기
+            </h2>
+            <div id="quiz-container" class="space-y-8">
+                <!-- Quiz Question will be injected here -->
             </div>
-
-            <div class="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-                <div id="practice-title" class="bg-indigo-600 p-4 text-white font-bold text-lg">
-                    사례 1: 아메리카의 발견
+            <div id="quiz-result" class="hidden text-center py-10 animate-fade-in">
+                <div class="mb-4 inline-block p-4 bg-indigo-100 text-indigo-600 rounded-full">
+                    <i data-lucide="award" class="w-12 h-12"></i>
                 </div>
-                <div class="p-6 md:p-8">
-                    <div id="practice-text" class="mb-8 p-5 bg-white rounded-xl border-l-4 border-indigo-300 shadow-inner italic text-slate-700 leading-relaxed">
-                        "많은 사람들이 콜럼버스가 미국을 최초로 발견했다고 생각하지만, 사실 그는 최초가 아닙니다. 수천 년 전, 고대인들이 러시아와 알래스카 사이의 육교를 통해 아메리카로 건너와 정착했습니다."
-                    </div>
-                    
-                    <div id="practice-steps" class="space-y-4">
-                        <!-- Steps will be injected here -->
-                    </div>
-                </div>
+                <h3 class="text-3xl font-bold text-slate-800 mb-2">학습 완료!</h3>
+                <p id="final-score" class="text-xl text-indigo-600 font-bold mb-6">당신의 점수: 0 / 5</p>
+                <button id="restart-quiz" class="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold shadow-lg hover:bg-indigo-700 transition-all text-sm uppercase tracking-wider">
+                    다시 풀기
+                </button>
             </div>
-            <p id="practice-counter" class="mt-6 text-center text-slate-400 text-sm font-medium">
-                연습 문제 1 / 2
-            </p>
         </div>
     </main>
 
@@ -270,37 +260,42 @@
     </footer>
 
     <script>
-        // Data
-        const practiceData = [
+        const quizData = [
             {
-                title: "사례 1: 아메리카의 발견",
-                text: "많은 사람들이 콜럼버스가 미국을 최초로 발견했다고 생각하지만, 사실 그는 최초가 아닙니다. 수천 년 전, 고대인들이 러시아와 알래스카 사이의 육교를 통해 아메리카로 건너와 정착했습니다.",
-                steps: [
-                    { label: "1. 누구/무엇?", value: "아메리카를 최초로 발견한 사람들" },
-                    { label: "2. 핵심 정보 (묘사)", value: "러시아와 알래스카 사이의 육교를 건너옴" },
-                    { label: "3. 요지 작성", value: "아메리카를 최초로 발견한 사람들은 고대에 육교를 통해 그곳에 도착했습니다." }
-                ]
+                q: "Get the Gist 1단계에서 찾아야 하는 것은?",
+                a: ["문단의 첫 문장", "가장 중요한 '누구' 또는 '무엇'", "글쓴이의 이름", "어려운 단어"],
+                correct: 1
             },
             {
-                title: "사례 2: 학교의 세균",
-                text: "학교에는 수백만 마리의 세균이 살고 있습니다. 특히 음수대와 식당 쟁반에 많죠. 이 세균들은 아이들을 병들게 하지만, 손을 잘 씻는 것만으로도 예방할 수 있습니다.",
-                steps: [
-                    { label: "1. 누구/무엇?", value: "학교의 세균" },
-                    { label: "2. 핵심 정보 (문제-해결)", value: "병을 일으키는 문제와 손 씻기라는 해결책" },
-                    { label: "3. 요지 작성", value: "학교 세균은 아이들을 병들게 할 수 있는 문제이지만, 손 씻기로 예방할 수 있습니다." }
-                ]
+                q: "학생들이 주로 2단계에서 저지르는 실수는?",
+                a: ["세부 사항(Detail)을 핵심 정보로 착각함", "글을 너무 빨리 읽음", "제목을 무시함", "단어를 하나도 모름"],
+                correct: 0
+            },
+            {
+                q: "문제-해결(PS) 구조를 기억하기 위한 제스처는?",
+                a: ["손을 벌리는 동작", "박수 치기", "엄지 내리기 후 엄지 올리기", "어깨 으쓱하기"],
+                correct: 2
+            },
+            {
+                q: "Fix-up 전략 중 '누구/무엇'의 강력한 단서를 제공하는 것은?",
+                a: ["그림의 색깔", "글의 제목(Heading)", "종이의 재질", "친구의 표정"],
+                correct: 1
+            },
+            {
+                q: "요지(Gist)를 작성할 때 가장 중요한 원칙은?",
+                a: ["본문을 그대로 베껴 쓰기", "자신의 말로(Own words) 종합하기", "최대한 짧게 쓰기", "영어로만 쓰기"],
+                correct: 1
             }
         ];
 
-        let currentPracticeIndex = 0;
+        let currentQuizIndex = 0;
+        let quizScore = 0;
 
-        // Functions
         function initLucide() {
             lucide.createIcons();
         }
 
         function switchTab(tabId) {
-            // Update buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 if (btn.getAttribute('data-tab') === tabId) {
                     btn.classList.add('bg-indigo-600', 'text-white', 'shadow-lg');
@@ -311,92 +306,79 @@
                 }
             });
 
-            // Update content
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
                 if (content.id === tabId) {
                     content.classList.add('active');
                 }
             });
+
+            if (tabId === 'quiz') {
+                resetQuiz();
+            }
         }
 
-        function updatePractice() {
-            const data = practiceData[currentPracticeIndex];
-            document.getElementById('practice-title').innerText = data.title;
-            document.getElementById('practice-text').innerText = `"${data.text}"`;
-            document.getElementById('practice-counter').innerText = `연습 문제 ${currentPracticeIndex + 1} / ${practiceData.length}`;
-
-            const stepsContainer = document.getElementById('practice-steps');
-            stepsContainer.innerHTML = '';
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            const resultDiv = document.getElementById('quiz-result');
             
-            data.steps.forEach(step => {
-                const div = document.createElement('div');
-                div.className = 'flex flex-col sm:flex-row gap-2 sm:gap-4 items-start sm:items-center';
-                div.innerHTML = `
-                    <div class="w-full sm:w-28 flex-shrink-0 text-[10px] font-bold text-indigo-500 uppercase tracking-widest">${step.label}</div>
-                    <div class="w-full flex-grow p-4 bg-indigo-50 rounded-xl text-indigo-900 font-semibold border border-indigo-100 animate-fade-in">
-                        ${step.value}
+            if (currentQuizIndex >= quizData.length) {
+                container.classList.add('hidden');
+                resultDiv.classList.remove('hidden');
+                document.getElementById('final-score').innerText = `당신의 점수: ${quizScore} / ${quizData.length}`;
+                initLucide();
+                return;
+            }
+
+            container.classList.remove('hidden');
+            resultDiv.classList.add('hidden');
+            
+            const question = quizData[currentQuizIndex];
+            container.innerHTML = `
+                <div class="animate-fade-in">
+                    <p class="text-sm font-bold text-indigo-500 uppercase tracking-widest mb-2 text-center">문제 ${currentQuizIndex + 1} / ${quizData.length}</p>
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 leading-tight text-center">${question.q}</h3>
+                    <div class="grid gap-3">
+                        ${question.a.map((option, idx) => `
+                            <button onclick="handleQuizAnswer(${idx})" class="option-btn">
+                                ${option}
+                            </button>
+                        `).join('')}
                     </div>
-                `;
-                stepsContainer.appendChild(div);
-            });
-
-            // Button states
-            document.getElementById('prev-btn').disabled = currentPracticeIndex === 0;
-            document.getElementById('next-btn').disabled = currentPracticeIndex === practiceData.length - 1;
-            
-            document.getElementById('prev-btn').style.opacity = currentPracticeIndex === 0 ? '0.5' : '1';
-            document.getElementById('next-btn').style.opacity = currentPracticeIndex === practiceData.length - 1 ? '0.5' : '1';
+                </div>
+            `;
         }
 
-        // Modal Logic
+        window.handleQuizAnswer = (selectedIndex) => {
+            if (selectedIndex === quizData[currentQuizIndex].correct) {
+                quizScore++;
+            }
+            currentQuizIndex++;
+            renderQuiz();
+        };
+
+        function resetQuiz() {
+            currentQuizIndex = 0;
+            quizScore = 0;
+            renderQuiz();
+        }
+
         const modal = document.getElementById('info-modal');
         const openBtn = document.getElementById('open-infographic');
         const closeBtn = document.getElementById('close-modal');
 
-        openBtn.addEventListener('click', () => {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
+        openBtn.addEventListener('click', () => { modal.classList.add('active'); document.body.style.overflow = 'hidden'; });
+        closeBtn.addEventListener('click', () => { modal.classList.remove('active'); document.body.style.overflow = 'auto'; });
+        modal.addEventListener('click', (e) => { if (e.target === modal) { modal.classList.remove('active'); document.body.style.overflow = 'auto'; } });
 
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Tab Listeners
         document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                switchTab(btn.getAttribute('data-tab'));
-            });
+            btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab')));
         });
 
-        // Practice Nav Listeners
-        document.getElementById('prev-btn').addEventListener('click', () => {
-            if (currentPracticeIndex > 0) {
-                currentPracticeIndex--;
-                updatePractice();
-            }
-        });
+        document.getElementById('restart-quiz').addEventListener('click', resetQuiz);
 
-        document.getElementById('next-btn').addEventListener('click', () => {
-            if (currentPracticeIndex < practiceData.length - 1) {
-                currentPracticeIndex++;
-                updatePractice();
-            }
-        });
-
-        // Initialize
         window.onload = () => {
             initLucide();
-            updatePractice();
         };
     </script>
 </body>
