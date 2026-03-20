@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여명중학교 | 문해력과 질문</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        // Tailwind 설정에 수동 다크모드 활성화
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Pretendard', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        // 화면 깜빡임 방지를 위한 최우선 실행 스크립트
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        body { font-family: 'Pretendard', sans-serif; scroll-behavior: smooth; }
+        
+        /* 다크모드 전환 시 부드러운 애니메이션 효과 전역 적용 */
+        body, nav, section, div, h1, h2, h3, p, button, a {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-sm z-50 border-b border-transparent dark:border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-book-open-reader text-brand-500 text-2xl"></i>
+                    <span class="font-bold text-xl tracking-tight text-slate-900 dark:text-white">여명중 문해력 클래스</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#hero" class="text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-brand-400 font-semibold transition">홈</a>
+                    <a href="#picture-book" class="text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-brand-400 font-semibold transition">그림책 읽기</a>
+                    <a href="#group-activity" class="text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-brand-400 font-semibold transition">모둠활동</a>
+                    
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" type="button" class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none rounded-lg text-sm p-2.5 ml-2 transition">
+                        <i id="theme-toggle-dark-icon" class="hidden fa-solid fa-moon text-lg"></i>
+                        <i id="theme-toggle-light-icon" class="hidden fa-solid fa-sun text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto flex flex-col items-center text-center min-h-[80vh] justify-center">
+        <div class="inline-block px-4 py-1.5 rounded-full bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-300 font-semibold text-sm mb-6 border border-brand-100 dark:border-brand-800">
+            여명중학교 1학년을 위한 특별한 수업 ✨
+        </div>
+        <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white">
+            세상을 읽고, <br class="md:hidden">
+            <span class="gradient-text">나만의 질문</span>을 던져라!
+        </h1>
+        <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl leading-relaxed">
+            "문해력과 질문" 교과목에 오신 것을 환영합니다. 그림책을 통해 생각의 깊이를 더하고, 인공지능(AI)과 함께 여러분의 상상력을 현실로 만들어보는 흥미진진한 여정이 시작됩니다.
+        </p>
+        <div class="flex gap-4">
+            <a href="#picture-book" class="bg-brand-600 text-white px-8 py-3.5 rounded-full font-bold hover:bg-brand-500 transition shadow-lg hover:shadow-xl flex items-center gap-2">
+                수업 내용 보기 <i class="fa-solid fa-arrow-down"></i>
+            </a>
+            <button onclick="openModal()" class="bg-white dark:bg-slate-800 text-brand-600 dark:text-brand-400 border-2 border-brand-100 dark:border-slate-700 px-8 py-3.5 rounded-full font-bold hover:bg-brand-50 dark:hover:bg-slate-700 transition shadow-sm flex items-center gap-2">
+                선생님께 질문하기
+            </button>
+        </div>
+    </section>
+
+    <!-- Section 1: Picture Book -->
+    <section id="picture-book" class="py-20 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">📚 그림책 깊이 읽기</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-lg">단순히 읽는 것을 넘어, 세 가지 단계를 통해 문해력의 기초를 탄탄하게 다집니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1: 어휘 -->
+                <div class="card-hover bg-amber-50 dark:bg-amber-900/10 rounded-3xl p-8 border border-amber-100 dark:border-amber-900/30 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-amber-200 dark:bg-amber-800/20 rounded-bl-full opacity-50"></div>
+                    <div class="w-14 h-14 bg-amber-400 text-white rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-md">
+                        <i class="fa-solid fa-spell-check"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-amber-900 dark:text-amber-300">1. 어휘 탐험</h3>
+                    <p class="text-amber-800 dark:text-amber-200/70 leading-relaxed">
+                        그림책 속에 숨겨진 낯선 단어들을 찾고, 문맥을 통해 의미를 추리해봅니다. 나만의 어휘장을 만들어 어휘력을 확장시킵니다.
+                    </p>
+                    <button class="mt-6 text-amber-600 dark:text-amber-400 font-bold hover:text-amber-700 dark:hover:text-amber-300 flex items-center gap-1 group">
+                        어휘 퀴즈 풀어보기 <i class="fa-solid fa-chevron-right group-hover:translate-x-1 transition"></i>
+                    </button>
+                </div>
+
+                <!-- Card 2: 문장 -->
+                <div class="card-hover bg-emerald-50 dark:bg-emerald-900/10 rounded-3xl p-8 border border-emerald-100 dark:border-emerald-900/30 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-200 dark:bg-emerald-800/20 rounded-bl-full opacity-50"></div>
+                    <div class="w-14 h-14 bg-emerald-400 text-white rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-md">
+                        <i class="fa-solid fa-quote-left"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-emerald-900 dark:text-emerald-300">2. 문장 수집</h3>
+                    <p class="text-emerald-800 dark:text-emerald-200/70 leading-relaxed">
+                        마음을 울리는 아름다운 문장이나 중요한 의미를 담은 문장을 찾아 수집합니다. 왜 이 문장을 선택했는지 친구들과 나눕니다.
+                    </p>
+                </div>
+
+                <!-- Card 3: 요약 -->
+                <div class="card-hover bg-purple-50 dark:bg-purple-900/10 rounded-3xl p-8 border border-purple-100 dark:border-purple-900/30 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-purple-200 dark:bg-purple-800/20 rounded-bl-full opacity-50"></div>
+                    <div class="w-14 h-14 bg-purple-400 text-white rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-md">
+                        <i class="fa-solid fa-compress"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-purple-900 dark:text-purple-300">3. 구조화 및 요약</h3>
+                    <p class="text-purple-800 dark:text-purple-200/70 leading-relaxed">
+                        이야기의 시작-중간-끝을 파악하고 핵심 사건을 연결하여, 전체 내용을 나만의 언어로 짧고 명확하게 요약하는 훈련을 합니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Group Activity -->
+    <section id="group-activity" class="py-20 bg-slate-100 dark:bg-slate-950">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">🤝 친구와 재미있게 배우는 모둠활동</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-lg mb-12">친구들과 함께 협동하여 미션을 해결하고 문해력을 키워보세요!</p>
+
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-200 dark:border-slate-800">
+                <div class="mb-8">
+                    <div class="w-24 h-24 bg-brand-50 dark:bg-brand-900/30 text-brand-500 dark:text-brand-400 rounded-full flex items-center justify-center text-4xl mx-auto mb-6">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-slate-900 dark:text-white">우리는 어느 팀일까?</h3>
+                    <p id="teamResult" class="text-xl text-slate-500 dark:text-slate-400 h-8 transition-all duration-300">버튼을 눌러 팀을 배정받으세요.</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button onclick="assignTeam()" class="w-full sm:w-auto bg-brand-600 hover:bg-brand-500 text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-dice"></i> 팀 정하기
+                    </button>
+                    <button onclick="location.href='./01/index.html'" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i> 활동하기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-200/50 dark:bg-slate-900 py-10 text-center border-t border-transparent dark:border-slate-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">여명중학교 국어과 / 정보과 융합수업</h2>
+            <p class="text-slate-600 dark:text-slate-400 mb-6">질문이 살아있는 교실, 문해력으로 성장하는 우리들</p>
+            <p class="text-sm text-slate-500 dark:text-slate-500">&copy; 2026 Yeomyeong Middle School. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Modal -->
+    <div id="questionModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden z-[100] flex items-center justify-center">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-md w-full mx-4 transform scale-95 opacity-0 transition-all duration-300 border border-transparent dark:border-slate-700" id="modalContent">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-slate-800 dark:text-white">질문 남기기 💡</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p class="text-slate-600 dark:text-slate-300 mb-4">수업에 대해 궁금한 점이 있나요? 무엇이든 자유롭게 질문해주세요!</p>
+            <textarea class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 h-32 mb-4 focus:outline-none focus:border-brand-500 dark:focus:border-brand-400 focus:ring-2 focus:ring-brand-200 dark:focus:ring-brand-900 resize-none text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500" placeholder="예: 그림책은 직접 가져와야 하나요?"></textarea>
+            <button onclick="closeModal(); alert('질문이 선생님께 전송되었습니다! 수업 시간에 만나요 😊');" class="w-full bg-brand-600 text-white font-bold py-3.5 rounded-xl hover:bg-brand-500 transition shadow-md">
+                선생님께 보내기
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // --- Theme Toggle Logic ---
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // 초기 아이콘 설정
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+
+        themeToggleBtn.addEventListener('click', function() {
+            // 아이콘 토글
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            // 테마 토글 및 로컬 스토리지 저장
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+
+        // --- Random Team Logic ---
+        function assignTeam() {
+            const teams = ['A팀', 'B팀', 'C팀'];
+            const randomTeam = teams[Math.floor(Math.random() * teams.length)];
+            const resultDisplay = document.getElementById('teamResult');
+            
+            resultDisplay.textContent = randomTeam + "에 배정되었습니다! 🎉";
+            // 다크모드 대응을 위해 기존 색상 제거 후 새로운 색상 추가
+            resultDisplay.classList.remove('text-slate-500', 'dark:text-slate-400');
+            resultDisplay.classList.add('text-brand-600', 'dark:text-brand-400', 'font-bold');
+        }
+
+        // --- Modal Logic ---
+        const modal = document.getElementById('questionModal');
+        const modalContent = document.getElementById('modalContent');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    </script>
+</body>
+</html>
