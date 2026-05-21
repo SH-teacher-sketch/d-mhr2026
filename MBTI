@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여명중학교 | 문해력과 질문 - MBTI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Gowun Dodum', sans-serif;
+            background-color: #f8fafc;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .animate-bounce-slow {
+            animation: bounce 3s infinite;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased min-h-screen pb-20">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 text-white text-center py-12 px-4 shadow-md rounded-b-3xl">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-white text-pink-500 font-bold px-3 py-1 rounded-full text-sm mb-4 inline-block shadow-sm">여명중학교 1학년</span>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 mt-2">문해력과 질문 🤔💡</h1>
+            <p class="text-lg md:text-xl opacity-90">MBTI를 통해 나를 이해하고, 더 좋은 질문을 던지는 방법을 알아봐요!</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 mt-10 space-y-16">
+
+        <!-- Activity 1: MBTI Test Link -->
+        <section class="text-center bg-white p-8 rounded-3xl shadow-sm border border-gray-100 card-hover">
+            <h2 class="text-2xl font-bold mb-2 text-purple-700">🎯 활동 1: 나의 MBTI 검사하기</h2>
+            <p class="text-gray-600 mb-6">아직 내 MBTI를 모른다면? 혹은 다시 검사해보고 싶다면 아래 버튼을 눌러주세요!</p>
+            <a href="https://www.16personalities.com/ko/무료-성격-유형-검사" target="_blank" class="inline-flex items-center justify-center bg-purple-500 hover:bg-purple-600 text-white font-bold text-lg py-4 px-8 rounded-full transition-colors animate-bounce-slow shadow-lg">
+                🔍 16Personalities 무료 검사하러 가기
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </a>
+            <p class="text-sm text-gray-400 mt-4">* 검사는 약 10~15분 정도 걸려요. 솔직하게 답변해보세요!</p>
+        </section>
+
+        <!-- Activity 2: MBTI Indicators Info -->
+        <section>
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold mb-2 text-blue-600">📚 활동 2: MBTI 4가지 지표 파헤치기</h2>
+                <p class="text-gray-600">MBTI는 4가지 지표의 조합으로 만들어져요. 각 알파벳이 무엇을 뜻하는지 알아볼까요?</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- E vs I -->
+                <div class="bg-yellow-50 rounded-2xl p-6 border-t-4 border-yellow-400 shadow-sm card-hover">
+                    <h3 class="text-xl font-bold text-center mb-4 text-yellow-700">⚡ 에너지의 방향</h3>
+                    <div class="flex justify-between items-stretch gap-4">
+                        <div class="flex-1 bg-white p-4 rounded-xl text-center shadow-sm">
+                            <div class="text-3xl font-black text-yellow-500 mb-2">E</div>
+                            <div class="font-bold text-gray-700 mb-1">외향형 (Extraversion)</div>
+                            <p class="text-sm text-gray-600">외부 세계, 사람들과의 활동을 통해 에너지를 얻어요. 🗣️</p>
+                        </div>
+                        <div class="flex-1 bg-white p-4 rounded-xl text-center shadow-sm">
+                            <div class="text-3xl font-black text-gray-500 mb-2">I</div>
+                            <div class="font-bold text-gray-700 mb-1">내향형 (Introversion)</div>
+                            <p class="text-sm text-gray-600">내면 세계, 혼자만의 조용한 시간을 통해 에너지를 얻어요. 🎧</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- S vs N -->
+                <div class="bg-green-50 rounded-2xl p-6 border-t-4 border-green-400 shadow-sm card-hover">
+                    <h3 class="text-xl font-bold text-center mb-4 text-green-700">👀 인식 방식 (정보 수집)</h3>
+                    <div class="flex justify-between items-stretch gap-4">
+                        <div class="flex-1 bg-white p-4 rounded-xl text-center shadow-sm">
+                            <div class="text-3xl font-black text-green-500 mb-2">S</div>
+                            <div class="font-bold text-gray-700 mb-1">감각형 (Sensing)</div>
+                            <p class="text-sm text-gray-600">오감을 통해 관찰하고, 실제적이고 구체적인 사실에 집중해요. 🌳</p>
+                        </div>
+                        <div class="flex-1 bg-white p-4 rounded-xl text-center shadow-sm">
+                            <div class="text-3xl font-black text-gray-500 mb-2">N</div>
+                            <div class="font-bold text-gray-700 mb-1">직관형 (Intuition)</div>
+                            <p class="text-sm text-gray-600">상상력이 풍부하며, 사실 너머의 의미와 가능성에 집중해요. 🌌</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- T vs F -->
+                <div class="bg-blue-50 rounded-2xl p-6 border-t-4 border-blue-400 shadow-sm card-hover">
+                    <h3 class="text-xl font-bold text-center mb-4 text-blue-700">🧠 판단 방식 (의사 결정)</h3>
+                    <div class="flex justify-between items-stretch gap-4">
+                        <div class="flex-1 bg-white p-4 rounded-xl text-center shadow-sm">
+                            <div class="text-3xl font-black text-blue-500 mb-2">T</div>
+                            <div class="font-bold text-gray-700 mb-1">사고형 (Thinking)</div>
+                            <p class="text-sm text-gray-600">객관적인 사실과 논리를 바탕으로 원인과 결과를 분석하여 결정해요. 📊</p>
+                        </div>
+                        <div class="flex-1 bg-white p-4 rounded-xl text-center shadow-sm">
+                            <div class="text-3xl font-black text-gray-500 mb-2">F</div>
+                            <div class="font-bold text-gray-700 mb-1">감정형 (Feeling)</div>
+                            <p class="text-sm text-gray-600">사람들과의 관계, 감정과 상황을 고려하여 공감하며 결정해요. ❤️</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- J vs P -->
+                <div class="bg-pink-50 rounded-2xl p-6 border-t-4 border-pink-400 shadow-sm card-hover">
+                    <h3 class="text-xl font-bold text-center mb-4 text-pink-700">📅 생활 양식</h3>
+                    <div class="flex justify-between items-stretch gap-4">
+                        <div class="flex-1 bg-white p-4 rounded-xl text-center shadow-sm">
+                            <div class="text-3xl font-black text-pink-500 mb-2">J</div>
+                            <div class="font-bold text-gray-700 mb-1">판단형 (Judging)</div>
+                            <p class="text-sm text-gray-600">계획을 세우고 체계적으로 일정을 진행하는 것을 선호해요. 📝</p>
+                        </div>
+                        <div class="flex-1 bg-white p-4 rounded-xl text-center shadow-sm">
+                            <div class="text-3xl font-black text-gray-500 mb-2">P</div>
+                            <div class="font-bold text-gray-700 mb-1">인식형 (Perceiving)</div>
+                            <p class="text-sm text-gray-600">상황에 맞게 유연하게 대처하고 자율적인 방식을 선호해요. 🏄</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity 3: Interactive Quiz -->
+        <section class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden">
+            <div class="bg-gradient-to-r from-teal-400 to-emerald-400 py-6 px-8 text-center">
+                <h2 class="text-2xl font-bold text-white">🕹️ 미니 퀴즈: 나도 MBTI 박사?</h2>
+                <p class="text-teal-50 mt-1">방금 배운 내용을 바탕으로 정답을 맞춰보세요!</p>
+            </div>
+            
+            <div class="p-8" id="quiz-container">
+                <!-- Quiz Content will be injected here via JS -->
+                <div id="quiz-header" class="flex justify-between items-center mb-6">
+                    <span id="question-counter" class="font-bold text-teal-600 bg-teal-50 px-3 py-1 rounded-full">문제 1 / 4</span>
+                    <span id="score-display" class="font-bold text-gray-500">점수: 0</span>
+                </div>
+
+                <div id="question-box" class="mb-8">
+                    <h3 id="question-text" class="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed">친구가 우울해할 때, "왜 우울해? 무슨 일 있었어?" 라며 원인을 먼저 찾는 유형은?</h3>
+                </div>
+
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <!-- Option Buttons -->
+                </div>
+
+                <div id="feedback-container" class="hidden rounded-xl p-4 mb-6 text-center text-lg font-bold">
+                    <!-- Feedback Message -->
+                </div>
+
+                <div class="text-center">
+                    <button id="next-btn" class="hidden bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-md w-full md:w-auto">
+                        다음 문제로! 🚀
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result Container -->
+            <div id="result-container" class="hidden p-10 text-center">
+                <div class="text-6xl mb-4">🏆</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">퀴즈 완료!</h2>
+                <p id="final-score" class="text-xl text-gray-600 mb-8">당신의 점수는...</p>
+                <button onclick="initQuiz()" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-md">
+                    다시 풀기 🔄
+                </button>
+            </div>
+        </section>
+
+        <!-- Activity 4: Padlet Sharing -->
+        <section class="text-center bg-orange-50 p-8 rounded-3xl shadow-sm border border-orange-100 card-hover">
+            <h2 class="text-2xl font-bold mb-2 text-orange-600">💬 활동 마무리: 내 MBTI를 패들렛에 적어주세요</h2>
+            <p class="text-gray-600 mb-6">검사 결과와 퀴즈를 풀며 느낀 점을 친구들과 함께 공유해 볼까요?</p>
+            <a href="https://padlet.com/didls030303_/padlet-ybmrjd33zqfl3stc" target="_blank" class="inline-flex items-center justify-center bg-orange-400 hover:bg-orange-500 text-white font-bold text-lg py-4 px-8 rounded-full transition-colors shadow-lg">
+                📌 패들렛에 내 MBTI 남기기
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
+        </section>
+
+    </main>
+
+    <script>
+        const quizData = [
+            {
+                question: "새로운 학기가 시작되었어요! 친구들을 많이 사귀는 활동적인 자리에서 에너지를 팍팍 얻는 유형은?",
+                options: ["E (외향형)", "I (내향형)"],
+                correctAnswerIndex: 0,
+                explanation: "정답은 E(외향형)입니다! 외부의 사람들과 어울리며 상호작용할 때 에너지를 충전한답니다. 🎉"
+            },
+            {
+                question: "수업 시간에 '사과'에 대해 이야기할 때, '빨갛다, 둥글다, 달콤하다'처럼 오감으로 느껴지는 사실을 먼저 떠올리는 유형은?",
+                options: ["S (감각형)", "N (직관형)"],
+                correctAnswerIndex: 0,
+                explanation: "정답은 S(감각형)입니다! 현재 눈에 보이는 사실과 구체적인 정보에 집중하는 특징이 있어요. 🍎"
+            },
+            {
+                question: "친구가 '나 어제 슬퍼서 머리 잘랐어 ㅠㅠ'라고 했을 때, '머리 어디서 잘랐어? 많이 잘랐어?' 라고 사실을 먼저 묻는 유형은?",
+                options: ["T (사고형)", "F (감정형)"],
+                correctAnswerIndex: 0,
+                explanation: "정답은 T(사고형)입니다! 논리적이고 객관적인 사실 기반으로 상황을 분석하는 경향이 강해요. 🧐\n(F 유형이라면 '왜 슬펐어? ㅠㅠ' 라며 감정에 먼저 공감했을 거예요!)"
+            },
+            {
+                question: "가족 여행을 가기 전, 시간대별로 갈 곳과 먹을 것을 꼼꼼하게 계획표로 작성해야 마음이 편안한 유형은?",
+                options: ["J (판단형)", "P (인식형)"],
+                correctAnswerIndex: 0,
+                explanation: "정답은 J(판단형)입니다! 체계적으로 계획을 세우고 그에 맞춰 행동하는 것을 좋아한답니다. 📝"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionCounterEl = document.getElementById('question-counter');
+        const scoreDisplayEl = document.getElementById('score-display');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsContainerEl = document.getElementById('options-container');
+        const feedbackContainerEl = document.getElementById('feedback-container');
+        const nextBtnEl = document.getElementById('next-btn');
+        const quizContainerEl = document.getElementById('quiz-container');
+        const resultContainerEl = document.getElementById('result-container');
+        const finalScoreEl = document.getElementById('final-score');
+
+        function initQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizContainerEl.classList.remove('hidden');
+            resultContainerEl.classList.add('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const currentQuiz = quizData[currentQuestionIndex];
+            
+            // Reset UI
+            feedbackContainerEl.classList.add('hidden');
+            nextBtnEl.classList.add('hidden');
+            optionsContainerEl.innerHTML = '';
+            
+            // Update Headers
+            questionCounterEl.textContent = `문제 ${currentQuestionIndex + 1} / ${quizData.length}`;
+            scoreDisplayEl.textContent = `점수: ${score * 25}점`;
+            questionTextEl.textContent = currentQuiz.question;
+
+            // Generate Options
+            currentQuiz.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = "bg-gray-50 border-2 border-gray-200 hover:border-teal-400 hover:bg-teal-50 text-gray-700 font-bold py-4 px-6 rounded-2xl transition-all duration-200 text-lg shadow-sm";
+                button.onclick = () => checkAnswer(index, button);
+                optionsContainerEl.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedIndex, selectedButton) {
+            const currentQuiz = quizData[currentQuestionIndex];
+            const isCorrect = selectedIndex === currentQuiz.correctAnswerIndex;
+            
+            // Disable all buttons after selection
+            const allButtons = optionsContainerEl.querySelectorAll('button');
+            allButtons.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('hover:border-teal-400', 'hover:bg-teal-50');
+                btn.classList.add('opacity-60', 'cursor-not-allowed');
+            });
+
+            feedbackContainerEl.classList.remove('hidden');
+            
+            if (isCorrect) {
+                score++;
+                selectedButton.classList.replace('bg-gray-50', 'bg-green-100');
+                selectedButton.classList.replace('border-gray-200', 'border-green-500');
+                selectedButton.classList.remove('opacity-60');
+                
+                feedbackContainerEl.className = "rounded-xl p-4 mb-6 text-center text-lg font-bold bg-green-100 text-green-700 border border-green-200";
+                feedbackContainerEl.innerHTML = `딩동댕! 🥳<br><span class="text-sm font-normal mt-2 block">${currentQuiz.explanation}</span>`;
+            } else {
+                selectedButton.classList.replace('bg-gray-50', 'bg-red-100');
+                selectedButton.classList.replace('border-gray-200', 'border-red-500');
+                selectedButton.classList.remove('opacity-60');
+                
+                // Highlight correct answer
+                allButtons[currentQuiz.correctAnswerIndex].classList.replace('bg-gray-50', 'bg-green-50');
+                allButtons[currentQuiz.correctAnswerIndex].classList.replace('border-gray-200', 'border-green-400');
+                allButtons[currentQuiz.correctAnswerIndex].classList.remove('opacity-60');
+
+                feedbackContainerEl.className = "rounded-xl p-4 mb-6 text-center text-lg font-bold bg-red-100 text-red-700 border border-red-200";
+                feedbackContainerEl.innerHTML = `앗, 아쉬워요! 😢<br><span class="text-sm font-normal mt-2 block text-gray-700">${currentQuiz.explanation}</span>`;
+            }
+
+            scoreDisplayEl.textContent = `점수: ${score * 25}점`;
+            nextBtnEl.classList.remove('hidden');
+        }
+
+        nextBtnEl.addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        function showResults() {
+            quizContainerEl.classList.add('hidden');
+            resultContainerEl.classList.remove('hidden');
+            
+            let message = "";
+            let totalScore = score * 25;
+            if(totalScore === 100) message = "완벽해요! MBTI 마스터시네요! ✨";
+            else if(totalScore >= 50) message = "정말 잘했어요! 지표의 특징을 잘 파악하고 있군요. 👍";
+            else message = "괜찮아요! 지금부터 친구들의 성향을 더 알아가면 되죠! 💪";
+
+            finalScoreEl.innerHTML = `<span class="text-4xl font-black text-teal-600 block mb-4">${totalScore}점</span>${message}`;
+        }
+
+        // Initialize quiz on load
+        initQuiz();
+
+    </script>
+</body>
+</html>
